@@ -1,0 +1,15 @@
+<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark fixed-top scrolling-navbar rgba-gradient">
+    <mdb-navbar-brand>
+        <a class="navbar-brand waves-light" routerLink="/home">Drop App</a>
+    </mdb-navbar-brand>
+    <links>
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item waves-light" mdbWavesEffect>
+                <a class="nav-link waves-effect waves-light" routerLinkActive="active" [routerLink]="['/home']" fragment='hero'
+                    (click)="goHome()">
+                    Home
+                </a>
+            </li>
+        </ul>
+    </links>
+</mdb-navbar>
