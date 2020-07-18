@@ -1,0 +1,26 @@
+.dropdown-content {
+    right: 0 !important;
+    left: 0 !important;
+}
+
+.dropdown .dropdown-menu .dropdown-item, .dropleft .dropdown-menu .dropdown-item, .dropright .dropdown-menu .dropdown-item, .dropup-material .dropdown-menu .dropdown-item {
+    padding: 3px;
+}
+
+.dropdown-menu {
+    margin-top: 0;
+    min-width: 4.5rem;
+}
+
+.md-form {
+    margin-top: 0rem;
+}
+
+.datepicker-inline-icon {
+    top: 0
+}
+
+.card-body {
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+}

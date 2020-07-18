@@ -1,0 +1,156 @@
+<div class="drop_content">
+  <div class="row">
+    <div class="col-md-12 mb-4" style="padding-top: 5px;">
+      <div class="card">
+          <div class="card-body border-top">
+              <div class="row">
+                  <div class="col-sm-12 col-md-12 col-lg-12">
+                      <h3 class="text-center">Drop Item</h3>
+                      <div>
+                          <!-- <router-outlet></router-outlet> -->
+                          <div class="row">
+                              <div class="col-md-12">
+                                  <div class="col-md-12 col-lg-12 col-sm-6 overlay" *ngIf="submitting">
+                                    <div class="spinner-wrapper">
+                                      <div class="spinner-submiting"></div>
+                                    </div>
+                                  </div>
+                                  <mdb-stepper #stepper [linear]="true">
+                                      <mdb-step name="Select shop" [editable]="!submitting">
+                                        <div class="col-md-12 col-lg-12 col-sm-6 overlay" *ngIf="loading">
+                                            <div class="spinner-wrapper">
+                                              <div class="spinner"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4 mb-1 offset-sm-8">
+                                          <div>
+                                              <form [formGroup]="searchForm">
+                                                <div class="md-form text-center mr-0 pr-0">
+                                                  <input id="shop_name" type="text" class="form-control"  mdbInput
+                                                      mdbValidate formControlName="shop_name">
+                                                  <label for="shop_name">Search by shop name</label>   
+                                                  <mdb-error *ngIf="isInvalidShopName">Enter shop name to search</mdb-error>
+                                                </div>
+                                              </form>
+                                          </div>
+                                        </div>
+                                        <div class="col-md-12 col-sm-12 col-sm-6">
+                                          <div class="table-responsive">
+                                            <table class="table table-bordered table-hover">
+                                                <caption>List of Nearest Open Shops</caption>
+                                                <thead>
+                                                  <tr>
+                                                      <th scope="col">#</th>
+                                                      <th scope="col">Shop</th>
+                                                      <th scope="col">Location</th>
+                                                      <th scope="col">Tel</th>
+                                                      <th></th>
+                                                  </tr>
+                                              </thead>
+                                              <tbody>
+                                                  <tr *ngFor="let shop of nearestShops; let i = index;" (click)="checkboxLabel(shop)">
+                                                      <td>{{ shopNumber(i) }}.</td>
+                                                      <td><strong>{{ shop?.shop_name }}</strong></td>
+                                                      <td>{{ shop?.shop_location }}</td>
+                                                      <td>{{ shop?.phone_number }}</td>
+                                                      <td>
+                                                        <mdb-checkbox (click)="$event.stopPropagation()"
+                                                          (change)="checkboxLabel(shop)"
+                                                          [checked]="selection.isSelected(shop)">
+                                                        </mdb-checkbox>
+                                                    </td>
+                                                  </tr>
+                                              </tbody>
+                                            </table>
+                                            <a class="text-primary float-right" (click)="changeShop()">{{search_shop_label}}</a>
+                                          </div>
+                                        </div>
+                                        <pagination class="float-left drop_table_pagenation" [maxSize]="MAX_SIZE" [totalItems]="page.totalElements" [(ngModel)]="page.pageNumber" [itemsPerPage]="page.size"
+                                          (pageChanged)="pageChanged($event)">
+                                        </pagination >
+                                        <button class="float-right" mdbBtn size="sm" color="primary" [disabled]="!this.shopSelected" (click)="goNext(stepper)">Continue</button>
+                                      </mdb-step>
+                                      <mdb-step name="Item Details" [stepForm]="itemInfoForm">
+                                          <form [formGroup]="itemInfoForm">
+                                            <div class="row">
+                                              <div class="col-sm-12 col-md-6 col-lg-6">
+                                                <div class="md-form text-left">
+                                                    <i class="fa fa-id-card-alt blue-text prefix"></i>
+                                                    <input id="item_name" type="text" class="form-control mt-2" mdbInput mdbValidate formControlName="item_name">
+                                                    <label for="item_name">Item Name</label>
+                                                    <mdb-error *ngIf="isInvalidItemName">Item Name Required</mdb-error>
+                                                </div>
+                                              </div>
+                                              <div class="col-sm-12 col-md-6 col-lg-6">
+                                                <div class="md-form">
+                                                  <select class="form-control" formControlName="item_type">
+                                                    <option value="">Select Item Type</option>
+                                                    <option *ngFor="let itemtype of itemTypes" value="{{itemtype}}">{{itemtype}}</option>
+                                                  </select>
+                                                  <mdb-error *ngIf="isInvalidItemType">Item Type Required</mdb-error>
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <div class="row">
+                                              <div class="col-sm-12 col-md-6 col-lg-6">
+                                                <div class="md-form">
+                                                  <select class="form-control" formControlName="item_size">
+                                                    <option value="">Select Item Size</option>
+                                                    <option *ngFor="let itemsize of itemSizes" value="{{itemsize}}">{{itemsize}}</option>
+                                                  </select>
+                                                  <mdb-error *ngIf="isInvalidItemSize">Item Size Required</mdb-error>
+                                                </div>
+                                              </div>
+                                              <!-- <div class="col-sm-12 col-md-6 col-lg-6">
+                                                <div class="md-form">
+                                                  <mdb-date-picker name="pick_date" [options]="pickDateOptions" placeholder="When to pick" formControlName="pick_date"> </mdb-date-picker>
+                                                  <mdb-error *ngIf="isInvalidPickDate">Valid Pick Date Required</mdb-error>
+                                                </div>
+                                              </div> -->
+                                            </div>
+                                            <div class="row">
+                                              <div class="col-md-2">
+                                                <label>Other to pick</label>
+                                              </div>
+                                              <div class="col-md-3">
+                                                  <mdb-checkbox formControlName="other_person_pick" [checked]="false" (click)="$event.stopPropagation()" (change)="checkboxToPick($event)"></mdb-checkbox>
+                                              </div>
+                                            </div>
+                                            <div class="row" *ngIf="otherToPick">
+                                              <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <div class="md-form text-left">
+                                                  <input id="other_person_name" type="text" class="form-control mt-2" mdbInput mdbValidate formControlName="other_person_name">
+                                                  <label for="other_person_name">Other Person Name</label>
+                                                  <mdb-error *ngIf="otherToPick && isInvalidOtherName">Name of Person to pick is required</mdb-error>
+                                                </div>
+                                              </div>
+                                              <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <div class="md-form text-left">
+                                                  <input id="other_person_phone" type="text" class="form-control mt-2" mdbInput mdbValidate formControlName="other_person_phone">
+                                                  <label for="other_person_phone">Other Person Phone</label>
+                                                  <mdb-error *ngIf="otherToPick && isInvalidOtherPhone">Valid Phone Number of Person to pick is required</mdb-error>
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <button mdbBtn size="sm" color="primary" (click)="stepper.previous()"
+                                              [disabled]="submitting">Back</button>
+                                            <button type="submit" class="float-right waves-effect" mdbWavesEffect mdbBtn size="sm" outline="true" color="info" rounded="true"
+                                              [disabled]="!itemInfoForm.valid || submitting || !shopSelected" (click)="dropItemNow()">
+                                              <span *ngIf="!submitting">Drop Now</span>
+                                              <span *ngIf="submitting">
+                                                  <i class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></i> Dropping...
+                                              </span>
+                                            </button>
+                                          </form>
+                                                      </mdb-step>
+                                  </mdb-stepper>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>

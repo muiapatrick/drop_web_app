@@ -1,0 +1,28 @@
+.dropdown-content {
+    right: 0 !important;
+    left: 0 !important;
+}
+
+.dropdown .dropdown-menu .dropdown-item, .dropleft .dropdown-menu .dropdown-item, .dropright .dropdown-menu .dropdown-item, .dropup-material .dropdown-menu .dropdown-item {
+    padding: 3px;
+}
+
+.dropdown-menu {
+    margin-top: 0;
+    min-width: 4.5rem;
+}
+
+.card-body {
+    padding-top: 0em;
+    padding-right: 0em;
+    padding-left: 0em;
+}
+
+.md-form {
+    margin-top: 1rem;
+    margin-bottom: 0.75rem;
+}
+
+.mdb-tabcolor {
+    background-color: #0f7254 !important;
+}

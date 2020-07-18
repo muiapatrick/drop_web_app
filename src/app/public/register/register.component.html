@@ -1,0 +1,106 @@
+<section class="register-section nvb-bg">
+    <div class="container">
+      <div class="d-flex justify-content-center wow fadeInDown animated" data-wow-delay="0.3s"
+        style="visibility: visible; animation-name: fadeInDown; animation-delay: 0.3s;">
+  
+        <mdb-card *ngIf="!signedup">
+  
+          <mdb-card-header class="nvb-bg text-center py-4 app-text-color">
+            <h5><strong>Sign up</strong></h5>
+          </mdb-card-header>
+  
+          <mdb-card-body class="px-lg-5">
+            
+            <form [formGroup]="signupForm">
+                <div class="row">
+                    <div class="col-sm-6 col-md-4 col-lg-4">
+                        <div class="md-form text-center mr-0 pr-0">
+                            <input id="first_name" type="text" class="form-control"  mdbInput
+                                mdbValidate formControlName="first_name">
+                            <label for="first_name">First Name</label>   
+                            <mdb-error *ngIf="isInvalidFirstName">Please enter your first name</mdb-error>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-4 col-lg-4">
+                        <div class="md-form text-center">
+                            <input id="last_name" type="text" class="form-control"  mdbInput
+                                mdbValidate formControlName="last_name">
+                            <label for="last_name">Last Name</label>   
+                            <mdb-error *ngIf="isInvalidLastName">Please enter your Last name</mdb-error>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-4 col-lg-4">
+                        <div class="md-form text-center">
+                            <input id="other_name" type="text" class="form-control"  mdbInput
+                                mdbValidate formControlName="other_name">
+                            <label for="other_name">Other Name</label>   
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-md-6 col-lg-6">
+                        <div class="md-form text-center">
+                            <input id="identity_number" type="text" class="form-control mt-2"  mdbInput
+                                mdbValidate formControlName="identity_number">
+                            <label for="identity_number">Identity Number</label>   
+                            <mdb-error *ngIf="isInvalidIdNo">Please enter your national Identity Number</mdb-error>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-6">
+                        <div class="md-form text-center mr-0 pr-0">
+                            <input id="phone_number" type="text" class="form-control mt-2"  mdbInput
+                                mdbValidate formControlName="phone_number">
+                            <label for="phone_number">Phone Number</label> 
+                            <mdb-error *ngIf="isInvalidPhoneNo">Please enter valid Phone number</mdb-error>  
+                        </div>
+                    </div>
+                </div>
+                <div class="md-form text-center">
+                    <input id="email_address" type="tel" class="form-control mt-2"  mdbInput
+                        mdbValidate formControlName="email_address">
+                    <label for="email_address">Email Address</label> 
+                    <mdb-error *ngIf="isInvalidEmail">Please enter valid email address</mdb-error>  
+                </div>
+                <div class="text-center form-sm mt-2">
+                    <button mdbBtn color="info" outline="true" rounded="true" block="true" 
+                        class="z-depth-0 waves-effect mb-5" mdbWavesEffect type="submit"  
+                         (click)="signup()" [disabled]="!signupForm.valid || loading">
+                        <span *ngIf="!loading">Sign Up</span>
+                        <span *ngIf="loading">
+                            <i class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></i> Signing up...
+                        </span>
+                    </button>
+                    <p class="pt-1">
+                        <small>Already have an account?
+                            <a role="button" class="blue-text" [routerLink]="['/login']">Log in</a>
+                        </small>
+                    </p>
+                </div>            
+            </form>
+          </mdb-card-body>
+        </mdb-card>
+  
+        <mdb-card *ngIf="signedup">
+  
+            <mdb-card-header class="nvb-bg text-center py-4 app-text-color">
+              <h4 class="title"><mdb-icon fas icon="check"></mdb-icon>Signup successful.</h4>
+            </mdb-card-header>
+    
+            <mdb-card-body class="px-lg-5">              
+              <div class="text-center">
+                  <mdb-icon fas icon="envelope-open-text" size="4x" class="animated rotateIn mb-4"></mdb-icon>
+                  <p class="text-monospace">
+                      To activate your account,<br >
+                      Use One-Time-Password send to your phone number {{phoneNumber}} Or <br>
+                      A Link send to your email address {{emailAddress}}
+                  </p>
+              </div>
+              <div class="mt-4 text-right">
+                <a class="go-to-sign-in blue-text" [routerLink]="['/login']" ><i class="fa fa-angle-left"></i> Back to Login</a>
+              </div>
+            </mdb-card-body>
+          </mdb-card>
+
+      </div>
+    </div>
+</section>

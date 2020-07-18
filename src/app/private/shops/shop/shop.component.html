@@ -1,0 +1,254 @@
+<div class="drop_content">
+    <div class="row">
+        <div class="col-md-12 mb-4" style="padding-top: 5px;">
+            <div class="card">
+                <div class="card-body border-top">
+                    <div class="row">
+                        <div class="col-md-12 col-lg-12 col-sm-6 overlay" *ngIf="loading">
+                            <div class="spinner-wrapper">
+                              <div class="spinner"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row justify-content-between mb-2">
+                        <div class="col-md-4">
+                            <h2>{{shop?.shop_name | titlecase}} -
+                                <small>{{shop?.shop_location + '' | titlecase}} <br />
+                                {{shop?.phone_number}}</small>
+                            </h2>
+                        </div>
+                        <div class="col-md-5 offset-md-3 text-right mr-0">
+                                <a class="btn btn-sm btn-danger" rounded="true" (click)="openRequests()" mdbBtn mdbWavesEffect>
+                                    <i class="fa fa-tint"></i> Requests
+                                </a>
+                                <a *ngIf="hasShopAdminRole" class="btn btn-sm btn-info" rounded="true" (click)="openShopUsers()" mdbBtn mdbWavesEffect>
+                                    <i class="fa fa-users"></i> Users
+                                </a>
+                                <a *ngIf="hasShopAdminRole" class="btn btn-sm btn-secondary" rounded="true" (click)="openShopProfile()" mdbBtn mdbWavesEffect>
+                                    <i class="fa fa-bars" aria-hidden="true"></i> Shop Profile
+                                </a>
+                        </div>
+                    </div>
+                    <div class="row top_tiles">
+                        <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="tile-stats" (click)="openRequests('1')" mdbWavesEffect>
+                                <div class="icon"><i class="fa fa-tint"></i>
+                                </div>
+                                <div class="count">{{dropShopStats.new_dropping}}</div>
+            
+                                <h3>New Droppings</h3>
+                                <p>Pending Acceptance</p>
+                            </div>
+                        </div>
+                        <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="tile-stats" (click)="openRequests('2')" mdbWavesEffect >
+                                <div class="count">{{dropShopStats.stored_items}}</div>
+                    
+                                <h3>Stored Items</h3>
+                                <p>Items in store without pick requests</p>
+                            </div>
+                        </div>
+                        <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="tile-stats" (click)="openRequests('3')" mdbWavesEffect>
+                                <div class="count"><small>{{dropShopStats.release_requests}}</small></div>
+                    
+                                <h3>Pick Requests</h3>
+                                <p>Items With pick Requests.</p>
+                            </div>
+                        </div>
+                        <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="tile-stats">
+                                <div class="count"><small>KSH. {{dropShopStats.shop_earning}}</small></div>
+                                <h3>Today Earnings</h3>
+                                <p>{{today.getFullYear() +'-'+ (today.getMonth() + 1) +'-'+ today.getDate()}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="x_panel">
+                                <div class="x_title">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <h2>Drop Summary <small>Weekly progress</small></h2>
+                                        </div>
+                                        <div class="col-md-3 offset-sm-4">
+                                            <form [formGroup]="dateFilterForm">
+                                                <div class="md-form">
+                                                    <mdb-date-picker [inline]="true" name="pick_date" [options]="pickDateOptions" formControlName="pick_date"> </mdb-date-picker>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="x_content">
+                                    <div class="col-md-9 col-sm-12 col-xs-12">
+                                        <div>
+                                            <div style="display:block;">
+                                                <canvas mdbChart  #chart
+                                                [chartType]="chartType"
+                                                [datasets]="chartDatasets"
+                                                [labels]="chartLabels"
+                                                [colors]="chartColors"
+                                                [options]="chartOptions"
+                                                [legend]="true"
+                                                (chartHover)="chartHovered($event)"
+                                                (chartClick)="chartClicked($event)">
+                                            </canvas>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-sm-12 col-xs-12">
+                                        <div class="row">
+                                            <div class="animated flipInY col-lg-12 col-md-12 col-sm-12 col-xs-12"> 
+                                                <div class="tile-stats card">
+                                                    <div class="card-body border-top">
+                                                        <h4>Weekly Earnings</h4>
+                                                        <h2>Ksh. {{dropShopStats.Weekly_shop_earning}}</h2>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="animated flipInY col-lg-12 col-md-12 col-sm-12 col-xs-12"> 
+                                                <div class="tile-stats card">
+                                                    <div class="card-body border-top">
+                                                        <h4>Weekly Accepted Items</h4>
+                                                        <h2>{{dropShopStats.weekly_accepted_items}}</h2>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="animated flipInY col-lg-12 col-md-12 col-sm-12 col-xs-12"> 
+                                                <div class="tile-stats card">
+                                                    <div class="card-body border-top">
+                                                        <h4>Weekly Released Items</h4>
+                                                        <h2>{{dropShopStats.weekly_release_requests}}</h2>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="animated flipInY col-lg-12 col-md-12 col-sm-12 col-xs-12"> 
+                                                <div class="tile-stats card">
+                                                    <div class="card-body border-top">
+                                                        <h4>Weekly Unpicked Items</h4>
+                                                        <h2>{{dropShopStats.weekly_unpicked_requests}}</h2>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="x_panel">
+                                <h2>Recent <small>Drop Requests</small></h2>
+                                <div class="x_content">
+                                    <div class="col-md-12 com-sm-12 col-xs-12">
+                                        <div class="table-responsive">
+                                            <table class="table table-hover">
+                                                <caption>List of Drop Requests</caption>
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col">#</th>
+                                                        <th scope="col">Name</th>
+                                                        <th scope="col">Description</th>
+                                                        <th scope="col">Type</th>
+                                                        <th scope="col">Hours</th>
+                                                        <th scope="col">Cost</th>
+                                                        <th scope="col">Paid</th>
+                                                        <th scope="col">Balance</th>
+                                                        <th scope="col">Status</th>
+                                                        <th scope="col">Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let item of itemList; let i = index;">
+                                                        <td>{{ itemNumber(i) }}.</td>
+                                                        <td>{{item.item_name}}</td>
+                                                        <td>{{item.item_description}}</td>
+                                                        <td>{{item.item_type}}</td>
+                                                        <td>{{item.hours_stored}}</td>
+                                                        <td>{{item.total_cost}}</td>
+                                                        <td>{{item.total_cost_paid}}</td>
+                                                        <td>{{item.total_cost_unpaid}}</td>
+                                                        <td>{{item.status.name}}</td>
+                                                        <td class="text-center">
+                                                            <div class="dropdown waves-light" dropdown role="menu"
+                                                                *ngIf="(item.status.id === 1 || item.status.id === 3)">
+                                                                <a class="waves-light" style="width: 100%;" dropdownToggle mdbWavesEffect>
+                                                                    <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                                                                </a>
+                                                                <div class="dropdown-menu">
+                                                                    <a *ngIf="item.status.id === 1" class="dropdown-item" (click)="acceptDeclineItem('accept', item)">Accept</a>
+                                                                    <a *ngIf="item.status.id === 1" class="dropdown-item" (click)="acceptDeclineItem('decline', item)">Decline</a>
+                                                                    <a *ngIf="item.status.id === 3" class="dropdown-item" (click)="acceptDeclineItem('release', item)">Release</a>
+                                                                </div>
+                                                            </div>
+                                                            <!-- <div class="dropdown waves-light" dropdown role="menu"
+                                                                *ngIf="item.status.id === 1 || (item.status.id === 2 && !(item.release_number == null || item.release_number == ''))">
+                                                                <a class="waves-light" style="width: 100%;" dropdownToggle mdbWavesEffect>
+                                                                    <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                                                                </a>
+                                                                <div class="dropdown-menu">
+                                                                  <a *ngIf="item.status.id === 1" class="dropdown-item">Accept</a>
+                                                                  <a *ngIf="item.status.id === 1" class="dropdown-item">Decline</a>
+                                                                  <a *ngIf="item.status.id === 2 && !(item.release_number == null || item.release_number == '')" class="dropdown-item">Release</a>                                        
+                                                                </div>
+                                                            </div> -->
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <a class="text-primary float-right" (click)="openRequests()">View All</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="hasShopAdminRole">
+                        <div class="col-md-12">
+                            <div class="x_panel">
+                                <h2>Shop <small>Operators</small></h2>
+                                <div class="x_content">
+                                    <div class="col-md-12 com-sm-12 col-xs-12">
+                                        <div class="table-responsive">
+                                            <table class="table table-hover table-sm">
+                                                <caption>List of Shop Operators</caption>
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col">#</th>
+                                                        <th scope="col">Name</th>
+                                                        <th scope="col">Email</th>
+                                                        <th scope="col">Phone</th>
+                                                        <th scope="col">Active</th>
+                                                        <th scope="col" class="text-center">Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let user of userList; let i = index;">
+                                                        <td>{{ itemNumber(i) }}.</td>
+                                                        <td>{{user.first_name + ' ' + user.last_name}}</td>
+                                                        <td>{{user.email_address}}</td>
+                                                        <td>{{user.phone_number}}</td>
+                                                        <td>
+                                                            <mdb-checkbox  [checked]="user.enabled" [disabled]="true"></mdb-checkbox>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <button style="cursor: pointer;" class="btn btn-primary btn-sm mr-2" (click)="viewUser(user)">View</button>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <a class="text-primary float-right" (click)="openShopUsers()">View All</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

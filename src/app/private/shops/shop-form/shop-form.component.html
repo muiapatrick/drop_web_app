@@ -1,0 +1,85 @@
+<p>shop-form works!</p>
+<!-- <div style="overflow-y: auto">
+    <div class="modal-header">
+        <button type="button" class="close pull-right" aria-label="Close" (click)="closeModal()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title w-100" id="myModalLabel">
+            <i class="fa fa-plus" aria-hidden="true"></i>Shop Details</h4>
+    </div>
+    <form [formGroup]="shopForm">
+        <form-wizard>
+            <wizard-step [title]="'Basic Info'" [isValid]="shopForm.valid" (onNext)="onStep1Next($event)">
+                <div class="container" autocomplete="off" style="min-height: 400px">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6 col-lg-6  mb-3">
+                            <div class="md-form">
+                                <input style="text-transform: capitalize" id="shop_name" type="text" class="form-control mt-2" mdbInput mdbValidate formControlName="shop_name">
+                                <label for="shop_name">Shop Name</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6 col-lg-6  mb-3">
+                            <div class="md-form">
+                                <input style="text-transform: capitalize" id="phone_number" type="text" class="form-control mt-2" mdbInput mdbValidate formControlName="phone_number">
+                                <label for="shop_name">Phone Number</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6 col-lg-6  mb-3">
+                            <div class="md-form">
+                                <input style="text-transform: capitalize" id="shop_location" type="text" class="form-control mt-2" mdbInput mdbValidate formControlName="shop_location">
+                                <label for="shop_location">Physical Location</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6 col-lg-6 mb-3">
+                            <div class="md-form row">
+                                <div class="col-sm-2">
+                                    <label>Open</label>
+                                </div>
+                                <div class="col-sm-3">
+                                    <mdb-checkbox formControlName="open_status" (click)="$event.stopPropagation()"  [checked]="false"></mdb-checkbox>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </wizard-step>
+            <wizard-step [title]="'Location on Map'" [isValid]="shopForm.valid" (onComplete)="updateShop()">
+                <div class="container" autocomplete="off" style="min-height: 400px;">
+                    <div class="row mb-3">
+                        <div class="col-md-12 mb-4" style="padding-top: 5px;">
+                            <div id="map">
+                                <agm-map [latitude]="currentLat" [longitude]="currentLong" [zoom]="zoom" [minZoom]="7" [maxZoom]="20" 
+                                    [fullscreenControl]="true"
+                                    [fullscreenControlOptions]="screenOptions"
+                                    [streetViewControl]="false" (mapReady)="mapReady($event)">
+
+                                    <div *ngIf="fields_enabled" id="search-control" class="form-group w-75 controls mt-1">
+                                        <input type="text" class="form-control" (key.enter)="$event.preventDefault()" 
+                                        placeholder="Search location by name, or building or road where your shop is located"
+                                            autocorrect="off" autocapitalize="off" spellcheck="off" #search >
+                                    </div>
+                                   
+                                    <agm-marker
+                                        [markerClickable]="false"
+                                        [latitude]="shopMarker?.lat"
+                                        [longitude]="shopMarker?.lng"
+                                        [label]="shopMarker?.label"
+                                        [markerDraggable]="shopMarker?.draggable"
+                                        (dragEnd)="markerDragEnd(shopMarker, $event)"
+                                        [iconUrl]="shopMarker?.icon"
+                                        [animation]="shopMarker?.animation">
+                                        
+                                        <agm-info-window>
+                                            <strong>{{shopMarker?.title}}</strong>
+                                        </agm-info-window>
+                                    </agm-marker>
+
+                                </agm-map>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </wizard-step>
+        </form-wizard>
+    </form>
+</div> -->

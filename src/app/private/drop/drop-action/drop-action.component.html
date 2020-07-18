@@ -1,0 +1,166 @@
+<div class="modal-header mdb-tabcolor white-text" *ngIf="action == 'pick' || action == 'pay' || action == 'accept' || action == 'release'" style="background-color: #0f7254 !important;">
+    <h4 class="title" *ngIf="action == 'pick'">Pick</h4>
+    <h4 class="title" *ngIf="action == 'pay'">Make Payment</h4>
+    <h4 class="title" *ngIf="action == 'accept'">Accept</h4>
+    <h4 class="title" *ngIf="action == 'release'">Release</h4>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeModal()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-header mdb-tabcolor white-text" *ngIf="action == 'cancel' || action == 'decline'" style="background-color: rgba(214, 53, 53) !important;">
+    <h4 class="title" *ngIf="action == 'cancel'">Cancel Drop Request</h4>
+    <h4 class="title" *ngIf="action == 'decline'">Decline</h4>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeModal()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body text-center">
+    <div class="card ">
+        <div class="card-body pt-0">
+            <form [formGroup]="dropActionForm">
+
+                <div class="row" *ngIf="action == 'pick'">
+                    <div class="col-sm-12 col-md-12 col-lg-12 text-center">
+                        <h2>Are you sure you want to pick?</h2>
+                    </div>
+                </div>
+                <div class="row" *ngIf="(action == 'pick' && item.payment_required) || action == 'pay'">
+                    <div class="col-sm-4 col-md-4 col-lg-4">
+                        <h2>Payment Mode</h2>
+                    </div>
+                    <div class="col-sm-2 col-md-2 col-lg-2" *ngIf="item.status.id != 3">
+                        <div class="md-form form-check form-check-inline">
+                            <input type="radio" class="form-check-input" id="cashMode" name="payment_mode" formControlName="payment_mode" [value]="1" mdbInput>
+                            <label class="form-check-label" for="cashMode"><strong>Cash</strong></label>
+                        </div>
+                    </div>
+                    <div class="col-sm-2 col-md-2 col-lg-2">
+                        <div class="md-form form-check form-check-inline">
+                            <input type="radio" class="form-check-input" id="mpesaMode" name="payment_mode" formControlName="payment_mode" [value]="2"  mdbInput >
+                            <label class="form-check-label" for="mpesaMode"><strong>Mpesa</strong></label>
+                        </div>
+                    </div>
+                    <div class="col-sm-2 col-md-2 col-lg-2">
+                        <div class="md-form form-check form-check-inline">
+                            <input type="radio" class="form-check-input" id="walletMode" name="payment_mode" formControlName="payment_mode" [value]="3"  mdbInput >
+                            <label class="form-check-label" for="walletMode"><strong>Wallet</strong></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" *ngIf="action == 'cancel'">
+                    <div class="col-sm-12 col-md-12 col-lg-12 text-center">
+                        <h2>Are you sure you want to cancel?</h2>
+                    </div>
+                </div>
+                <div class="row" *ngIf="action == 'accept' || action == 'release' || (action == 'accept' && pay_mode == 2)">
+                    <div class="col-sm-2 col-md-2 col-lg-2 pull-right">
+                        <h2>Paid</h2>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-6 pull-left " style="padding: 0 !important;">
+                        <div class="md-form form-check form-check-inline">
+                            <input type="radio" class="form-check-input" id="paidYes" name="is_paid" formControlName="is_paid" [value]="true" mdbInput>
+                            <label class="form-check-label" for="paidYes"><strong>Yes</strong></label>
+                        </div>
+                        <div class="md-form form-check form-check-inline">
+                            <input type="radio" class="form-check-input" id="paidNo" name="is_paid" formControlName="is_paid" [value]="false"  mdbInput >
+                            <label class="form-check-label" for="paidNo"><strong>No</strong></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" *ngIf="action == 'decline'">
+                    <div class="col-sm-12 col-md-12 col-lg-12 text-center">
+                        <h2>Are you sure you want to decline?</h2>
+                    </div>
+                </div>
+                <div class="row" *ngIf="insufficient_wallet_balance">
+                    <div class="col-sm-12 col-md-12 col-lg-12 text-center">
+                        <h2 style="color: #f44336;">{{insufficient_wallet_balance_msg}}</h2>
+                    </div>
+                </div>
+                <div class="row" *ngIf="show_mpesa_instructions">
+                    <div class="col-sm-12 col-md-12 col-lg-12 text-center">
+                        <h2 style="color: #f44336;">Please wait for MPesa Push on phone number {{mpesa_phoneno}} and enter your pin to complete the payment.</h2>
+                    </div>
+                </div>
+                <div class="row" *ngIf="action == 'release'">
+                    <div class="col-sm-12 col-md-12 col-lg-12 text-center">
+                        <h2>Are you sure you want to Release The Item?</h2>                              
+                        <h2 *ngIf="action == 'release' && item_payment_required">
+                            <small style="color: #f44336;">{{payment_required_msg}}</small>
+                        </h2>
+                    </div>
+                </div>
+                <div class="row" *ngIf="action == 'release'">
+                    <div class="col-sm-1 col-md-1 col-lg-1"></div>
+                    <div class="col-sm-9 col-md-9 col-lg-9 text-center">
+                        <div class="md-form">
+                            <input id="release_number" type="text" class="form-control mt-2" mdbInput mdbValidate formControlName="release_number">
+                            <label for="release_number">Release Number</label>
+                            <mdb-error *ngIf="isInvalidReleaseNumber">Please enter valid release number</mdb-error>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" *ngIf="(action == 'accept' || action == 'release') && is_paid">
+                    <div class="col-sm-1 col-md-1 col-lg-1"></div>
+                    <div class="col-sm-9 col-md-9 col-lg-9 text-center">
+                        <div class="md-form">
+                            <input id="paid_amount" type="text" class="form-control mt-2" mdbInput mdbValidate formControlName="paid_amount">
+                            <label for="paid_amount">Paid Amount</label>
+                            <mdb-error *ngIf="is_paid && isInvalidAmount">{{amount_err_msg}}</mdb-error>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" *ngIf="pay_mode == 2 && !show_mpesa_instructions">
+                    <div class="col-sm-1 col-md-1 col-lg-1"></div>
+                    <div class="col-sm-9 col-md-9 col-lg-9 text-center">
+                        <div class="md-form">
+                            <input id="mpesa_phone" type="text" class="form-control mt-2" mdbInput mdbValidate formControlName="mpesa_phone">
+                            <label for="mpesa_phone">Mpesa Phone</label>
+                            <mdb-error *ngIf="isInvalidPhoneNumber">Please enter valid mpesa phone</mdb-error>
+                        </div>
+                    </div>
+                </div>
+                
+                
+                <div class="row">
+                    <div class="col-sm-1 col-md-1 col-lg-1"></div>
+                    <div class="col-sm-9 col-md-9 col-lg-9 text-center">
+                        <div class="text-center form-sm mt-2">
+
+                            <button *ngIf="action == 'pick'" mdbBtn color="success" outline="true" rounded="true" block="true" 
+                                class="waves-effect mb-5 ml-1" mdbWavesEffect type="submit" 
+                                [disabled]="!dropActionForm.valid" (click)="updateItemStatus('3', 'picked')">Pick
+                            </button>
+                            <button *ngIf="action == 'cancel'" mdbBtn color="danger" outline="true" rounded="true" block="true" 
+                                class="waves-effect mb-5 ml-1" mdbWavesEffect type="submit" 
+                                [disabled]="!dropActionForm.valid" (click)="updateItemStatus('4', 'cancelled')">Cancel
+                            </button>
+                            <button *ngIf="action == 'pay'" mdbBtn color="success" outline="true" rounded="true" block="true" 
+                                class="waves-effect mb-5 ml-1" mdbWavesEffect type="submit" 
+                                [disabled]="!dropActionForm.valid" (click)="makePayment('payment')">Proceed
+                            </button>
+                            <button *ngIf="action == 'accept'" mdbBtn color="success" outline="true" rounded="true" block="true" 
+                                class="waves-effect mb-5 ml-1" mdbWavesEffect type="submit" 
+                                [disabled]="!dropActionForm.valid" (click)="updateItemStatus('2', 'accepted')">Accept
+                            </button>
+                            <button *ngIf="action == 'decline'" mdbBtn color="danger" outline="true" rounded="true" block="true" 
+                                class="waves-effect mb-5 ml-1" mdbWavesEffect type="submit" 
+                                [disabled]="!dropActionForm.valid" (click)="updateItemStatus('7', 'declined')">Decline
+                            </button>
+                            <button *ngIf="action == 'release'" mdbBtn color="success" outline="true" rounded="true" block="true" 
+                                class="waves-effect mb-5 ml-1" mdbWavesEffect type="submit" 
+                                [disabled]="!dropActionForm.valid || !valid_release_number || !is_enough_amount || item_payment_required" (click)="updateItemStatus('5', 'released')">Release
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-danger btn-sm btn-rounded waves-effect mx-3 px-4" mdbBtn ronded="true" data-dismiss="modal"
+        (click)="closeModal()" mdbWavesEffect>
+        Close
+    </button>
+</div>

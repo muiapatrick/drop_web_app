@@ -1,0 +1,61 @@
+<div class="drop_content">
+    <div class="row">
+        <div class="col-md-12 mb-4" style="padding-top: 5px;">
+            <div class="row">
+                <div class="col-md-12 col-lg-12 col-sm-6 overlay" *ngIf="loading">
+                    <div class="spinner-wrapper">
+                        <div class="spinner"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 com-sm-12 col-xs-12">
+                    <mdb-card>
+                        <mdb-card-header class="nvb-bg app-text-color">
+                            <h2 class="mb-3">User Information
+                                <span *ngIf="hasShopAdminRole" class="float-right btn btn-primary btn-sm" (click)='openEditUserModal()'>Edit User</span>
+                                <span *ngIf="isUserProfile" class="float-right btn btn-primary btn-sm" (click)='resetPassword()'>Reset Password</span>
+                            </h2>
+                            </mdb-card-header>
+                        <mdb-card-body class="px-lg-5">
+                            <div class="row">
+                                <div class="col-sm-6 col-md-4">
+                                    <p class="app-text-color mb-1 section-edit-title">Names</p>
+                                    <h2>{{user?.first_name | titlecase}} {{user?.last_name | titlecase}}</h2>
+                                </div>
+                                <div class="col-sm-6 col-md-4">
+                                    <p class="app-text-color mb-1 section-edit-title">Email</p>
+                                    <h2>{{user?.email_address}}</h2>
+                                </div>
+                                <div class="col-sm-6 col-md-4">
+                                    <p class="app-text-color mb-1 section-edit-title">Phone Number</p>
+                                    <h2>{{user?.phone_number}}</h2>
+                                </div>
+                                <div class="col-sm-6 col-md-4">
+                                    <p class="app-text-color mb-1 section-edit-title">Status</p>
+                                    <span>
+                                        <span class="mr-2 badge badge-success"
+                                        *ngIf="user?.enabled == true"> Active</span>
+                                    <span class="mr-2 badge badge-danger" *ngIf="user?.enabled == false">Not Active</span>
+                                    </span>
+                                </div>
+                            </div>
+                            <h2 class="section-title mb-3">User Roles</h2>
+                        <div class="row mb-3">
+                            <div class="col-sm-12 col-md-4 col-lg-4 col-xl-3 mb-3" *ngFor="let role of roleList; let i = index">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title mb-1">{{role.name}}</h5>
+                                        <p class="card-text role-description">{{role.description}}</p>
+                                        <span class="mr-2 badge badge-success" *ngIf="role?.shop_name">{{role.shop_name}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </mdb-card-body>
+                    </mdb-card>
+                </div>   
+            </div>
+        </div>
+    </div>
+</div>

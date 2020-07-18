@@ -1,0 +1,54 @@
+// @import '../../../../../node_modules/bootstrap/dist/css/bootstrap.min.css';
+
+.profile_info h2 {
+  font-size: 14px;
+  color: #ECF0F1;
+  margin: 0;
+  font-weight: 300;
+}
+
+.navbar {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.nav li {
+  width: 100% !important;
+}
+
+.menu_section {
+  margin-bottom: 35px;
+}
+
+.menu_section h4 {
+  padding-left: 23px;
+  color: rgb(255, 255, 255);
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  font-weight: bold;
+  font-size: 11px;
+  margin-bottom: 0;
+  margin-top: 0;
+  // text-shadow: 1px 1px #000;
+}
+
+#sidebar-menu span.fa {
+  float: right;
+  text-align: center;
+  margin-top: 5px;
+  font-size: 10px !important;
+  min-width: inherit;
+  color: #C4CFDA;
+}
+
+.nav-sm ul.nav.child_menu {
+  font-weight: 800 !important;
+}
+
+.nav-sm .nav.side-menu li a i {
+  font-weight: bold;
+  font-size: 35px !important;
+  text-align: center;
+  width: 100% !important;
+  margin-bottom: 5px;
+}

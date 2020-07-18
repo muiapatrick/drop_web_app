@@ -1,0 +1,60 @@
+<div class="drop_map">
+    <div class="row">
+        <div class="col-md-12 mb-4" style="padding-top: 5px;">
+            <div id="map">
+                <agm-map [latitude]="currentLat" [longitude]="currentLong" [zoom]="zoom" [minZoom]="7" [maxZoom]="20" 
+                    [fullscreenControl]="true"
+                    [fullscreenControlOptions]="screenOptions"
+                    [streetViewControl]="false" (mapReady)="mapReady($event)">  
+                    
+                    <button id="btn-drop-control" class="btn btn-outline-danger btn-sm 
+                    waves-effect controls btn-control" (click)="dropItem()">
+                        <i class="fa fa-tint" aria-hidden="true"></i>
+                    </button>
+                    <button id="btn-pick-control" class="btn btn-outline-info btn-sm waves-effect btn-control" (click)="pickItem()">
+                        <i class="fas fa-hand-holding"></i>
+                    </button>
+
+                    <agm-marker 
+                        *ngFor="let m of markers; let i = index"
+                        [markerClickable]="m.clickable"
+                        (markerClick)="clickedMarker(m.label, i)"
+                        [latitude]="m.lat"
+                        [longitude]="m.lng"
+                        [label]="m.label"
+                        [markerDraggable]="m.draggable"
+                        (dragEnd)="markerDragEnd(m, $event)"
+                        [iconUrl]="m.icon"
+                        [animation]="m.animation">
+                        
+                        <agm-info-window>
+                            <strong>{{m.title}}</strong>
+                        </agm-info-window>
+                    </agm-marker>
+
+                    <agm-direction *ngIf="show_path" [origin]="origin" [destination]="destination">
+                        
+                    </agm-direction>
+                </agm-map>
+                <div class="tools w-50 d-flex">
+                    <div class="form-group w-75 flex-center">
+                        <input type="text" class="form-control" (key.enter)="$event.preventDefault()" 
+                        placeholder="Search nearest shop by location, or building or road"
+                          autocorrect="off" autocapitalize="off" spellcheck="off" #search >
+                    </div>
+                </div>
+            </div>
+            
+            
+            
+            <!-- <div #mapContainer id="map"></div>
+            <div class="tools">
+                <div class="form-group">
+                    <input type="text" class="form-control" (key.enter)="$event.preventDefault()" 
+                    placeholder="Search nearest shop by location, or building or road"
+                      autocorrect="off" autocapitalize="off" spellcheck="off" #search >
+                  </div>
+            </div> -->
+        </div>
+    </div>
+</div>

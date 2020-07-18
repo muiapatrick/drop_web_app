@@ -1,0 +1,77 @@
+<div class="drop_content">
+    <div class="row">
+        <div class="col-md-12 mb-4" style="padding-top: 5px;">
+            <div class="card">
+                <div class="card-body border-top">
+                    <div class="row mb-2">
+                        <div class="col-md-4 mt-2">
+                            <h2>{{first_name | titlecase}} - <small>Shop Operators</small></h2>
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-md-4 mt-2">
+                            <h2>{{shop.shop_name | titlecase}} - <small>Shop Operators</small></h2>
+                        </div>
+                        <div class="col-md-4 offset-md-4">
+                            <form [formGroup]="searchForm">
+                                <div class="md-form text-center mr-2 pr-1">
+                                    <input id="search_value" type="text" class="form-control"  mdbInput mdbValidate formControlName="search_value">
+                                    <label for="search_value">Search by name/phone</label>   
+                                    <mdb-error *ngIf="isInvalidSearchValue">Enter a name/phone to search</mdb-error>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-lg-12 col-sm-6 overlay" *ngIf="loading">
+                            <div class="spinner-wrapper">
+                              <div class="spinner"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-lg-12 col-sm-6">
+                            <span class="float-right btn btn-primary btn-sm" (click)='openUserModal()'>
+                                <i class="fa fa-user-plus" aria-hidden="true"></i>Add User</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 com-sm-12 col-xs-12">
+                            <div class="table-responsive">
+                                <table class="table table-hover table-sm">
+                                    <caption>List of Shop Operators</caption>
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Name</th>
+                                            <th scope="col">Email</th>
+                                            <th scope="col">Phone</th>
+                                            <th scope="col">Active</th>
+                                            <th scope="col" class="text-center">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let user of userList; let i = index;">
+                                            <td>{{ itemNumber(i) }}.</td>
+                                            <td>{{user.first_name + ' ' + user.last_name}}</td>
+                                            <td>{{user.email_address}}</td>
+                                            <td>{{user.phone_number}}</td>
+                                            <td>
+                                                <mdb-checkbox  [checked]="user.enabled" [disabled]="true"></mdb-checkbox>
+                                            </td>
+                                            <td class="text-center">
+                                                <button style="cursor: pointer;" class="btn btn-primary btn-sm mr-2" (click)="viewUser(user)">View</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    
+                        <pagination class="float-left drop_table_pagenation" [maxSize]="MAX_SIZE" [totalItems]="page.totalElements" [(ngModel)]="page.pageNumber" [itemsPerPage]="page.size"
+                            (pageChanged)="pageChanged($event)">
+                        </pagination >
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

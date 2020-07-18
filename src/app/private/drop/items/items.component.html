@@ -1,0 +1,106 @@
+<div class="drop_content">
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12 mb-4" style="padding-top: 5px;">
+            <div class="card">
+                <div class="card-body border-top">
+                    <div class="row">
+                        <div class="col-md-12 col-lg-12 col-sm-12 mb-2">
+                            <form [formGroup]="searchForm">
+                                <div class="row">
+                                    <div class="col-md-4 offset-md-3">
+                                        <div class="md-form text-center">
+                                            <input id="search_field" type="text" class="form-control"  mdbInput mdbValidate formControlName="search_field">
+                                            <label for="search_field">Search by {{searchFieldBy.name}}</label>   
+                                            <mdb-error *ngIf="isInvalidFieldValue">Enter {{searchFieldBy.name}} to search</mdb-error>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 offset-md-2">
+                                        <div class="md-form  mr-2 pr-1">
+                                            <select class="form-control" formControlName="filter_criteria" (change)="onFilterCriteriaChange($event.target.value)">
+                                              <option value="">Filter By </option>
+                                              <option *ngFor="let status of itemStatuses" value="{{status.v}}">{{status.name}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-lg-12 col-sm-6 overlay" *ngIf="loading">
+                            <div class="spinner-wrapper">
+                              <div class="spinner"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12 col-sm-6">
+                        <div class="table-responsive">
+                          <table class="table table-bordered table-hover">
+                              <caption>List of Dropped Items</caption>
+                              <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Description</th>
+                                    <th scope="col">Type</th>
+                                    <th *ngIf="!is_shop_management" scope="col">Shop</th>
+                                    <th *ngIf="!is_shop_management" scope="col">Release No</th>
+                                    <th scope="col">Hours</th>
+                                    <th scope="col">Cost</th>
+                                    <th scope="col">Paid</th>
+                                    <th scope="col">Balance</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of itemList; let i = index;">
+                                    <td>{{ itemNumber(i) }}.</td>
+                                    <td>{{item.item_name}}</td>
+                                    <td>{{item.item_description}}</td>
+                                    <td>{{item.item_type}}</td>
+                                    <td *ngIf="!is_shop_management">{{item.shop.shop_name}}</td>
+                                    <td *ngIf="!is_shop_management">{{item.release_number}}</td>
+                                    <td>{{item.hours_stored}}</td>
+                                    <td>{{item.total_cost}}</td>
+                                    <td>{{item.total_cost_paid}}</td>
+                                    <td>{{item.total_cost_unpaid}}</td>
+                                    <td>{{item.status.name}}</td>
+                                    <td class="text-center">
+                                        <div class="dropdown waves-light" dropdown role="menu" 
+                                        *ngIf="!is_shop_management && item.status.id != 4 && item.status.id != 5 && !(item.status.id === 3 && !item.payment_required)">
+                                            <a class="waves-light" style="width: 100%;" dropdownToggle mdbWavesEffect>
+                                                <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                                            </a>
+                                            <div class="dropdown-menu">
+                                              <a *ngIf="item.status.id === 1" class="dropdown-item" (click)="editItem(item)">Edit</a>
+                                              <a *ngIf="item.status.id === 2" class="dropdown-item"  (click)="openDropActionModal('pick', item)">Pick</a>
+                                              <a *ngIf="!(item.status.id === 1 || item.status.id === 4 || item.status.id === 5) && item.payment_required" class="dropdown-item"  (click)="openDropActionModal('pay', item)">Pay</a>
+                                              <a *ngIf="item.status.id === 1" class="dropdown-item"  (click)="openDropActionModal('cancel', item)">Cancel</a>                                                  
+                                            </div>
+                                        </div>
+                                        <div class="dropdown waves-light" dropdown role="menu"
+                                            *ngIf="(item.status.id === 1 || item.status.id === 3) && is_shop_management">
+                                            <a class="waves-light" style="width: 100%;" dropdownToggle mdbWavesEffect>
+                                                <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                                            </a>
+                                            <div class="dropdown-menu">
+                                                <a *ngIf="item.status.id === 1" class="dropdown-item" (click)="openDropActionModal('accept', item)">Accept</a>
+                                                <a *ngIf="item.status.id === 1" class="dropdown-item" (click)="openDropActionModal('decline', item)">Decline</a>
+                                                <a *ngIf="item.status.id === 3" class="dropdown-item" (click)="openDropActionModal('release', item)">Release</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        </div>
+                    </div>
+                    <pagination class="float-left drop_table_pagenation" [maxSize]="MAX_SIZE" [totalItems]="page.totalElements" [(ngModel)]="page.pageNumber" [itemsPerPage]="page.size"
+                        (pageChanged)="pageChanged($event)">
+                    </pagination >
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

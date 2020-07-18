@@ -1,0 +1,343 @@
+<div class="drop_content">
+    <div class="row">
+        <div class="col-md-12 mb-4">
+            <div class="card">
+                <div class="card-body border-top">
+                    <div class="row mb-2">
+                        <div class="col-md-4">
+                            <h2>Drop <small>Dashboard</small></h2>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-lg-12 col-sm-6 overlay" *ngIf="loading">
+                            <div class="spinner-wrapper">
+                              <div class="spinner"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row top_tiles">
+                        <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="tile-stats" mdbWavesEffect>
+                                <div class="icon"><i class="fa fa-store"></i>
+                                </div>
+                                <div class="count">0 Shops</div>
+            
+                                <p class="mt-3">
+                                    <span class="mr-2 float-right badge badge-success">View</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-9 col-md-9 col-sm-6">
+                            
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-3">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- <div class="right_col" role="main">
+        <div class="page-title">
+            <div class="title_left">
+                <h2>Drop <small>Dashboard</small></h2>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        
+        <div class="row">
+            <div class="col-md-12 col-lg-12 col-sm-6 overlay" *ngIf="showSpinner">
+                            <div class="spinner-wrapper">
+                                <app-spinner></app-spinner>
+                            </div>
+                        </div>
+            <div class="col-md-12 col-lg-12 col-sm-6">
+                    <div class="row top_tiles">
+                        <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="tile-stats">
+                                <div class="icon"><i class="fa fa-tint"></i>
+                                </div>
+                                <div class="count">179</div>
+            
+                                <h3>New Droppings</h3>
+                                <p>Pending Acceptance</p>
+                            </div>
+                        </div>
+                        <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="tile-stats">
+                                <div class="count">179</div>
+                    
+                                <h3>Stored Items</h3>
+                                <p>Items in store without pick requests</p>
+                            </div>
+                        </div>
+                        <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="tile-stats">
+                                <div class="count">179</div>
+                    
+                                <h3>Pick Requests</h3>
+                                <p>Items With pick Requests.</p>
+                            </div>
+                        </div>
+                        <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="tile-stats">
+                                <div class="count">179</div>
+                    
+                                <h3>Total Stored Items</h3>
+                                <p>Pick + Stored</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 wow fadeInUp animate" data-wow-delay="0.3s"
+                        style="animation-name: fadeInUp; animation-delay: 0.3s;">
+                            <div class="x_panel">
+                                <div class="x_title">
+                                    <h4 style="float: left;">Drop Requests</h4>
+                                    <div class="filter" style="float: right;">
+                                        <div id="reportrange" class="pull-right"
+                                            style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
+                                            <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+                                            <span>December 30, 2014 - January 28, 2015</span> <b class="caret"></b>
+                                        </div>
+                                        </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="x_content">
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col">#</th>
+                                                        <th scope="col">Tag No</th>
+                                                        <th scope="col">Item Name</th>
+                                                        <th scope="col">Item Type</th>
+                                                        <th scope="col">Item Size</th>
+                                                        <th scope="col">Drop Date</th>
+                                                        <th class="text-center" scope="col">Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let item of items; let i = index;">
+                                                        <td>{{ i + 1 }}.</td>
+                                                        <td><strong>{{ item?.tag_number }}</strong></td>
+                                                        <td>{{ item?.tag_number }}</td>
+                                                        <td>{{ item?.tag_number }}</td>
+                                                        <td>{{ item?.tag_number }}</td>
+                                                        <td>{{ item?.tag_number }}</td>
+                                                        <td class="text-center">
+                                                            <button style="cursor: pointer;" class="btn btn-primary btn-sm mr-2">View</button>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <a class="text-primary float-right">View All</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+
+        <div class="row wrapper">
+            <div class="col-md-12 col-lg-12 col-sm-6">
+                <div class="overlay" *ngIf="showSpinner">
+                    <div class="spinner-wrapper">
+                        <app-spinner1></app-spinner1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 col-lg-12 col-sm-6">
+                <div class="loaded-content" [class.blurred]="showSpinner">
+                    <div class="row top_tiles">
+                        <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="tile-stats">
+                                <div class="icon"><i class="fa fa-tint"></i>
+                                </div>
+                                <div class="count">179</div>
+            
+                                <h3>New Droppings</h3>
+                                <p>Pending Acceptance</p>
+                            </div>
+                        </div>
+                        <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="tile-stats">
+                                <div class="count">179</div>
+                    
+                                <h3>Stored Items</h3>
+                                <p>Items in store without pick requests</p>
+                            </div>
+                        </div>
+                        <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="tile-stats">
+                                <div class="count">179</div>
+                    
+                                <h3>Pick Requests</h3>
+                                <p>Items With pick Requests.</p>
+                            </div>
+                        </div>
+                        <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="tile-stats">
+                                <div class="count">179</div>
+                    
+                                <h3>Total Stored Items</h3>
+                                <p>Pick + Stored</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 wow fadeInUp animate" data-wow-delay="0.3s"
+                        style="animation-name: fadeInUp; animation-delay: 0.3s;">
+                            <div class="x_panel">
+                                <div class="x_title">
+                                    <h4 style="float: left;">Drop Requests</h4>
+                                    <div class="filter" style="float: right;">
+                                        <div id="reportrange" class="pull-right"
+                                            style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
+                                            <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+                                            <span>December 30, 2014 - January 28, 2015</span> <b class="caret"></b>
+                                        </div>
+                                        </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="x_content">
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col">#</th>
+                                                        <th scope="col">Tag No</th>
+                                                        <th scope="col">Item Name</th>
+                                                        <th scope="col">Item Type</th>
+                                                        <th scope="col">Item Size</th>
+                                                        <th scope="col">Drop Date</th>
+                                                        <th class="text-center" scope="col">Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let item of items; let i = index;">
+                                                        <td>{{ i + 1 }}.</td>
+                                                        <td><strong>{{ item?.tag_number }}</strong></td>
+                                                        <td>{{ item?.tag_number }}</td>
+                                                        <td>{{ item?.tag_number }}</td>
+                                                        <td>{{ item?.tag_number }}</td>
+                                                        <td>{{ item?.tag_number }}</td>
+                                                        <td class="text-center">
+                                                            <button style="cursor: pointer;" class="btn btn-primary btn-sm mr-2">View</button>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <a class="text-primary float-right">View All</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row top_tiles">
+                <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <div class="tile-stats">
+                        <div class="icon"><i class="fa fa-tint"></i>
+                        </div>
+                        <div class="count">179</div>
+    
+                        <h3>New Droppings</h3>
+                        <p>Pending Acceptance</p>
+                    </div>
+                </div>
+                <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <div class="tile-stats">
+                        <div class="count">179</div>
+            
+                        <h3>Stored Items</h3>
+                        <p>Items in store without pick requests</p>
+                    </div>
+                </div>
+                <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <div class="tile-stats">
+                        <div class="count">179</div>
+            
+                        <h3>Pick Requests</h3>
+                        <p>Items With pick Requests.</p>
+                    </div>
+                </div>
+                <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <div class="tile-stats">
+                        <div class="count">179</div>
+            
+                        <h3>Total Stored Items</h3>
+                        <p>Pick + Stored</p>
+                    </div>
+                </div>
+    
+        </div>
+    
+        <div class="row">
+            <div class="col-md-12 wow fadeInUp animate" data-wow-delay="0.3s"
+            style="animation-name: fadeInUp; animation-delay: 0.3s;">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h4 style="float: left;">Drop Requests</h4>
+                        <div class="filter" style="float: right;">
+                            <div id="reportrange" class="pull-right"
+                                style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
+                                <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+                                <span>December 30, 2014 - January 28, 2015</span> <b class="caret"></b>
+                            </div>
+                            </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Tag No</th>
+                                            <th scope="col">Item Name</th>
+                                            <th scope="col">Item Type</th>
+                                            <th scope="col">Item Size</th>
+                                            <th scope="col">Drop Date</th>
+                                            <th class="text-center" scope="col">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item of items; let i = index;">
+                                            <td>{{ i + 1 }}.</td>
+                                            <td><strong>{{ item?.tag_number }}</strong></td>
+                                            <td>{{ item?.tag_number }}</td>
+                                            <td>{{ item?.tag_number }}</td>
+                                            <td>{{ item?.tag_number }}</td>
+                                            <td>{{ item?.tag_number }}</td>
+                                            <td class="text-center">
+                                                <button style="cursor: pointer;" class="btn btn-primary btn-sm mr-2">View</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <a class="text-primary float-right">View All</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div> -->

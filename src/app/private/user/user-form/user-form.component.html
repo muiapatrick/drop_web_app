@@ -1,0 +1,102 @@
+<div style="overflow-y: auto">
+    <div class="modal-header">
+        <button type="button" class="close pull-right" aria-label="Close" (click)="closeModal()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title w-100" id="myModalLabel">
+            <i class="fa fa-user-plus" aria-hidden="true"></i>User Details</h4>
+    </div>
+    <form [formGroup]="userDetailsForm">
+        <form-wizard>
+            <wizard-step [title]="'Basic Info'" [isValid]="userDetailsForm.valid" (onNext)="onStep1Next($event)">
+                <div class="container" autocomplete="off" style="min-height: 400px">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6 col-lg-6  mb-3">
+                            <div class="md-form">
+                                <input id="first_name" type="text" class="form-control mt-2" mdbInput mdbValidate formControlName="first_name">
+                                <label for="first_name">First Name</label>
+                                <mdb-error *ngIf="isInvalidFirstName">First name required</mdb-error>
+                            </div> 
+                        </div>
+                        <div class="col-sm-12 col-md-6 col-lg-6 mb-3">
+                            <div class="md-form">
+                                <input id="last_name" type="text" class="form-control mt-2" mdbInput mdbValidate formControlName="last_name">
+                                <label for="last_name">Last Name</label>
+                                <mdb-error *ngIf="isInvalidLastName">Last name required</mdb-error>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6 col-lg-6 mb-3">
+                            <div class="md-form">
+                                <input id="other_name" type="text" class="form-control mt-2" mdbInput mdbValidate formControlName="other_name">
+                                <label for="other_name">Other Name</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6 col-lg-6 mb-3">
+                            <div class="md-form">
+                                <input id="email_address" type="email" class="form-control mt-2" mdbInput mdbValidate formControlName="email_address">
+                                <label for="email_address">Email Address</label>
+                                <mdb-error *ngIf="isInvalidEmail">Please enter valid email address</mdb-error>  
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6 col-lg-6 mb-3">
+                            <div class="md-form">
+                                <input id="phone_number" type="text" class="form-control mt-2" mdbInput mdbValidate formControlName="phone_number">
+                                <label for="phone_number">Phone Number</label>
+                                <mdb-error *ngIf="isInvalidPhoneNo">Please enter valid Phone number</mdb-error>  
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6 col-lg-6 mb-3">
+                            <div class="md-form row">
+                                <div class="col-sm-4">
+                                    <label>Active Status</label>
+                                </div>
+                                <div class="col-sm-8">
+                                    <mdb-checkbox formControlName="enabled" (click)="$event.stopPropagation()"  [checked]="false"></mdb-checkbox>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </wizard-step>
+            <wizard-step [title]="'Role Management'" [isValid]="userDetailsForm.valid" (onComplete)="updateUserDetails()">
+                <div class="container" autocomplete="off" style="min-height: 400px;">
+                    <div class="row">
+                        <div class="col-sm-6 offset-sm-6">
+                            <div class="md-form">
+                                <select class="form-control" formControlName="select_role" (change)="onSelectRoleChange()">
+                                  <option [ngValue]="null">Select User Role</option>
+                                  <option *ngFor="let sysRole of systemRoles" [ngValue]="sysRole">{{sysRole.name}}</option>
+                                </select>
+                              </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="table-responsive">
+                                <table class="table table-hover table-sm" id="user_roles_tbl">
+                                    <caption>List of user roles</caption>
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Name</th>
+                                            <th scope="col">Description</th>
+                                            <th scope="col" class="text-center">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody style="font-size: 11px;">
+                                        <tr *ngFor="let role of userShopRoles; let i = index;">
+                                            <td>{{ itemNumber(i) }}.</td>
+                                            <td>{{role.name}}</td>
+                                            <td>{{role.description}}</td>
+                                            <td class="text-center">
+                                                <button type="button" (click)="deleteRole(role)" class="btn btn-danger btn-sm">Delete</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </wizard-step>
+        </form-wizard>
+    </form>
+</div>

@@ -1,0 +1,100 @@
+<div class="drop_content">
+    <div class="row">
+        <div class="col-md-12 mb-4" style="padding-top: 5px;">
+            <div class="row">
+                <div class="col-md-12 col-lg-12 col-sm-6 overlay" *ngIf="loading">
+                    <div class="spinner-wrapper">
+                        <div class="spinner"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 com-sm-12 col-xs-12">
+                    <mdb-card>
+                        <mdb-card-header class="nvb-bg app-text-color">
+                            <h2 class="mb-3">{{pageAction}}
+                                <span *ngIf="canEdit" class="float-right btn btn-primary btn-sm" (click)="postShop()">{{buttonActionLabel}}</span>
+                            </h2>
+                            </mdb-card-header>
+                        <mdb-card-body class="px-lg-5">
+                            <form [formGroup]="shopForm">
+                                <div class="row">
+                                    <div class="col-sm-6 col-md-4">
+                                        <div class="md-form">
+                                            <input style="text-transform: capitalize" id="shop_name" type="text" class="form-control" mdbInput mdbValidate formControlName="shop_name">
+                                            <label for="shop_name">Shop Name</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4">
+                                        <div class="md-form">
+                                            <input style="text-transform: capitalize" id="phone_number" type="text" class="form-control" mdbInput mdbValidate formControlName="phone_number">
+                                            <label for="shop_name">Phone Number</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4">
+                                        <div class="md-form">
+                                            <input style="text-transform: capitalize" id="shop_location" type="text" class="form-control" mdbInput mdbValidate formControlName="shop_location">
+                                            <label for="shop_location">Physical Location</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4">
+                                        <!-- <div class="md-form row"> -->
+                                            <div class="col-sm-2">
+                                                <label>Open</label>
+                                            </div>
+                                            <mdb-checkbox formControlName="open_status" (click)="$event.stopPropagation()"  [checked]="false"></mdb-checkbox>
+                                            <!-- <mdb-checkbox id="open_status" formControlName="open_status" (click)="$event.stopPropagation()"
+                                                [checked]="false" ></mdb-checkbox> -->
+                                        <!-- </div> -->
+                                        <!-- <div class="md-form row">
+                                            <div class="col-sm-4">
+                                                <label>Active Status</label>
+                                            </div>
+                                            <div class="col-sm-8">
+                                                <mdb-checkbox formControlName="enabled" (click)="$event.stopPropagation()"  [checked]="false"></mdb-checkbox>
+                                            </div>
+                                        </div> -->
+                                    </div>
+                                </div>
+                            <h2 class="section-title mb-1">Location on Map</h2>
+                            <div class="row mb-3">
+                                <div class="col-md-12 mb-4" style="padding-top: 5px;">
+                                    <div id="map">
+                                        <agm-map [latitude]="currentLat" [longitude]="currentLong" [zoom]="zoom" [minZoom]="7" [maxZoom]="20" 
+                                            [fullscreenControl]="true"
+                                            [fullscreenControlOptions]="screenOptions"
+                                            [streetViewControl]="false" (mapReady)="mapReady($event)">
+
+                                            <div id="search-control" class="form-group w-75 controls mt-1">
+                                                <input [ngClass]="{'hidden': shopForm.controls.search_control.disabled}" type="text" formControlName="search_control" class="form-control" (key.enter)="$event.preventDefault()" 
+                                                placeholder="Search location by name, or building or road where your shop is located"
+                                                    autocorrect="off" autocapitalize="off" spellcheck="off" #search >
+                                            </div>
+                                           
+                                            <agm-marker
+                                                [markerClickable]="false"
+                                                [latitude]="shopMarker?.lat"
+                                                [longitude]="shopMarker?.lng"
+                                                [label]="shopMarker?.label"
+                                                [markerDraggable]="shopMarker?.draggable"
+                                                (dragEnd)="markerDragEnd(shopMarker, $event)"
+                                                [iconUrl]="shopMarker?.icon"
+                                                [animation]="shopMarker?.animation">
+                                                
+                                                <agm-info-window>
+                                                    <strong>{{shopMarker?.title}}</strong>
+                                                </agm-info-window>
+                                            </agm-marker>
+
+                                        </agm-map>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        </mdb-card-body>
+                    </mdb-card>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

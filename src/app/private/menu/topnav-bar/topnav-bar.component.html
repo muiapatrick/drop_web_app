@@ -1,0 +1,94 @@
+<div class="top_nav">
+  <div class="nav_menu">
+      <nav class="navbar sticky-top navbar-expand navbar-light scrolling-navbar nvb-bg"
+        style="height: 100%; padding: 0;">      
+      <div class="nav toggle">
+        <a id="menu_toggle" (click)="toggleClicked('menu_toggle')">
+          <i class="fa fa-bars"></i></a>
+      </div>
+      <!-- <ul class="nav navbar-nav navbar-right"> -->
+      <ul class="nav navbar-nav ml-auto">
+          <!-- <li class="nav-item">
+            <a class="info-number" data-toggle="tooltip" data-placement="bottom" title="Open Shops">
+              <i class="fa fa-store"></i>
+              <span class="badge bg-red">{{openshops_count}}</span>
+            </a>
+          </li> -->
+          <li class="nav-item dropdown waves-light" dropdown role="presentation">
+            <a dropdownToggle class="nav-link dropdown-toggle waves-light info-number" mdbWavesEffect>
+              <i class="fa fa-envelope"></i>
+              <span class="badge bg-green">6</span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-right msg_list" role="menu">
+                <li class="dropdown-item">
+                  <a>
+                    <span class="image"><img src="assets/img.jpg" alt="Profile Image"/></span>
+                    <span>
+                      <span>John Smith</span>
+                      <span class="time">3 mins ago</span>
+                    </span>
+                    <span class="message">
+                      Film festivals used to be do-or-die moments for movie makers. They were where...
+                    </span>
+                  </a>
+                </li>
+                <li class="dropdown-item">
+                  <a>
+                    <span class="image"><img src="assets/img.jpg" alt="Profile Image"/></span>
+                    <span>
+                      <span>John Smith</span>
+                      <span class="time">3 mins ago</span>
+                    </span>
+                    <span class="message">
+                      Film festivals used to be do-or-die moments for movie makers. They were where...
+                    </span>
+                  </a>
+                </li>
+                <li class="dropdown-item">
+                  <a>
+                    <span class="image"><img src="assets/img.jpg" alt="Profile Image"/></span>
+                    <span>
+                      <span>John Smith</span>
+                      <span class="time">3 mins ago</span>
+                    </span>
+                    <span class="message">
+                      Film festivals used to be do-or-die moments for movie makers. They were where...
+                    </span>
+                  </a>
+                </li>
+                <li class="dropdown-item">
+                  <a>
+                    <span class="image"><img src="assets/img.jpg" alt="Profile Image"/></span>
+                    <span>
+                      <span>John Smith</span>
+                      <span class="time">3 mins ago</span>
+                    </span>
+                    <span class="message">
+                      Film festivals used to be do-or-die moments for movie makers. They were where...
+                    </span>
+                  </a>
+                </li>
+                <li class="dropdown-item">
+                  <div class="text-center">
+                    <a>
+                      <strong>See All Alerts</strong>
+                      <i class="fa fa-angle-right"></i>
+                    </a>
+                  </div>
+                </li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown waves-light" dropdown>
+            <a dropdownToggle class="nav-link dropdown-toggle waves-light user-profile" mdbWavesEffect>
+              <img src="assets/images/profile.jpg" alt="" />{{user.first_name | titlecase}} {{user.last_name | titlecase}}
+            </a>
+            <ul class="dropdown-menu dropdown-menu-right">
+              <li class="dropdown-item" [routerLink]="['/drop/user/profile']"><a> Profile</a></li>
+              <!-- <li class="dropdown-item"><a>Change Password</a></li> -->
+              <li class="dropdown-item" (click)="logout()"><a><i class="fas fa-sign-out-alt pull-right"></i> Log Out</a></li>
+            </ul>
+          </li>
+      </ul>
+    </nav>
+  </div>
+</div>

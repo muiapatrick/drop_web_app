@@ -1,0 +1,115 @@
+#map {
+    // height: 100%;
+    height: 100vh;
+    width: 100%;
+    padding-bottom: 55.25%;
+}
+
+// #map .gm-fullscreen-control {
+//     top: 25% !important;
+// }
+
+.drop_map {
+    padding-left: 0px !important;
+    padding-right: 9.5px !important;
+}
+
+
+.tools {
+    // z-index: 9999;
+    position: fixed;
+    top: 13%;
+    // width: 60%;
+    right: 20%;
+    cursor: pointer;
+}
+
+
+.tools_actions {
+    z-index: 9999;
+    position: fixed;
+    top: 20%;
+    left: 95.5%;
+    right: 20px;
+}
+
+agm-map {
+    height: 100vh;
+}
+
+// .btn-control {
+//     // background: rgb(255, 255, 255) none repeat scroll 0% 0%; 
+//     border: 0px none; 
+//     margin: 10px; 
+//     padding: 0px; 
+//     position: absolute; 
+//     cursor: pointer; 
+//     user-select: none;
+//     border-radius: 2px;
+//     height: 40px; 
+//     width: 40px; 
+//     // box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px; 
+//     // overflow: hidden;
+//     top: 36px;
+//     right: 0px;
+// }
+
+.btn-control {
+    background: rgb(255, 255, 255) none repeat scroll 0% 0%; 
+    margin: 10px; 
+    padding: 0px; 
+    position: absolute; 
+    cursor: pointer; 
+    user-select: none;
+    border-radius: 2px;
+    height: 40px; 
+    width: 40px; 
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px; 
+    overflow: hidden;
+    top: 36px;
+    right: 0px;
+}
+
+.btn-control:hover {
+    transition: 0.5s;
+    width: 60px; 
+}
+
+.btn-control i {
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+}
+
+.btn-control i:after {
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    // right: -40px;
+    transition: 0.5s;
+}
+
+.btn-control:hover i {
+    padding-right: 40px;
+}
+
+.btn-control:hover i:after {
+    opacity: 1;
+    right: 0;
+}
+
+#btn-drop-control i:after {
+    content: "Drop";
+}
+
+#btn-drop-control:hover {
+    background: #c00d1c; 
+}
+
+#btn-pick-control i:after {
+    content: "Pick";
+}
+
+#btn-pick-control:hover {
+    background: #0f7254;
+}

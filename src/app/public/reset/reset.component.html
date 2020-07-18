@@ -1,0 +1,67 @@
+<section class="reset-section nvb-bg">
+    <div class="container">
+      <div class="d-flex justify-content-center wow fadeInDown animated" data-wow-delay="0.3s"
+        style="visibility: visible; animation-name: fadeInDown; animation-delay: 0.3s;">
+  
+        <mdb-card >
+  
+          <mdb-card-header class="nvb-bg text-center py-4 app-text-color">
+            <h5>
+              <strong>Change Password</strong>
+            </h5>
+          </mdb-card-header>
+  
+          <mdb-card-body class="px-lg-5">
+  
+            <form class="text-center" [formGroup]="resetPwdForm">
+              <small class="form-text text-muted my-2">
+                Your password must be atleast 8 characters long, contain letters (small and uppercase), special characters and
+                numbers, and must not contain
+                spaces.
+              </small>
+
+  
+              <div class="text-left md-form mb-5">
+                <i class="fa fa-key blue-text prefix"></i>
+                <input type="password" id="password" class="form-control" formControlName="password" mdbInput mdbValidate>
+                <label for="password">Password</label>
+                <mdb-error *ngIf="isPasswordInvalid">
+                  <small *ngIf="isNewPasswordRequired" class="form-text text-danger mb-4 ">Please enter a password</small>
+                  <small *ngIf="isNewPasswordWeak" class="form-text text-danger mb-4 ">Weak Password</small>
+                </mdb-error>
+                <mdb-success *ngIf="!isPasswordInvalid && !isNewPasswordRequired && !isNewPasswordWeak">
+                  <small class="form-text text-success mb-4 ">Strong Password</small>
+                </mdb-success>
+              </div>
+
+              <div class="text-left md-form mb-5">
+                <i class="fa fa-key blue-text prefix"></i>
+                <input type="password" id="confirmPassword" class="form-control" formControlName="confirmPassword" mdbInput mdbValidate>
+                <label for="confirmPassword">Confirm Password</label>
+                <mdb-error *ngIf="isConfirmPasswordInvalid">
+                  <small *ngIf="isConfirmPasswordRequired" class="form-text text-danger mb-4 ">Please confirm password</small>
+                  <small *ngIf="isPasswordNotMatch" class="form-text text-danger mb-4 ">Password do not match</small>
+                </mdb-error>
+                <mdb-success *ngIf="!isConfirmPasswordInvalid && !isConfirmPasswordRequired && !isPasswordNotMatch">
+                  <small class="form-text text-success mb-4 ">Password match</small>
+                </mdb-success>
+              </div>
+
+              <button mdbBtn color="info" outline="true" rounded="true" block="true" 
+                      class="z-depth-0 waves-effect mb-3" mdbWavesEffect 
+                      type="submit" [disabled]="!resetPwdForm.valid || loading" (click)="resetPassword()">
+                      <span *ngIf="!loading">Reset Password</span>
+                      <span *ngIf="loading">
+                        <i class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></i> Reseting Password...</span>
+              </button>
+            </form>
+  
+            <div class="mt-4 text-right">
+              <a class="go-to-sign-in blue-text" [routerLink]="['/login']" ><i class="fa fa-angle-left"></i> Back to Login</a>
+            </div>
+  
+          </mdb-card-body>
+        </mdb-card>
+      </div>
+    </div>
+  </section>

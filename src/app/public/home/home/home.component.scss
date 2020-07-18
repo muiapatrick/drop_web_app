@@ -1,0 +1,47 @@
+// .home_section {
+//     // background-color: green($color: #000000);
+//     background-size: cover;
+//     height: 100vh;
+// }
+
+.intro {
+    // background: url(../../../assets/images/drop.jpg) no-repeat;
+    background-color: red($color: #9e3333);
+    background-size: cover;
+    height: 100vh;
+}
+
+#intro .d-flex{
+    padding-top: 2.5rem;
+    padding-bottom: 4rem;
+}
+
+.img-fluid{
+    max-height: 30rem;
+    max-width: 40rem;
+}
+
+.line-shape {
+    margin-left: calc(50% - 3rem);
+    width: 5rem;
+    background-color:  rgb(194, 194, 194);
+}
+
+#howitworks {
+    padding-top: 1rem;
+    padding-bottom: 4rem;
+}
+
+#whydrop {
+    padding-top: 1rem;
+    padding-bottom: 23rem;
+}
+
+#drop, #store {
+    padding-top: 1rem;
+    padding-bottom: 4rem;
+}
+
+.grey-gradient {
+    background: linear-gradient(146deg, rgba(255,255,255,1) 0%, rgba(247,247,247,1) 39%, rgba(215,215,215,1) 99%);
+}

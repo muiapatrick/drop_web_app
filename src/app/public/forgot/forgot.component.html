@@ -1,0 +1,69 @@
+<section class="forgot-section nvb-bg">
+    <div class="container">
+      <div class="d-flex justify-content-center wow fadeInDown animated" data-wow-delay="0.3s"
+        style="visibility: visible; animation-name: fadeInDown; animation-delay: 0.3s;">
+  
+        <mdb-card *ngIf="!success" >
+  
+          <mdb-card-header class="nvb-bg text-center py-4 app-text-color">
+            <h5>
+              <strong>Reset Password</strong>
+            </h5>
+          </mdb-card-header>
+  
+          <mdb-card-body class="px-lg-5">
+  
+            <form class="text-center" [formGroup]="forgotPwdForm">
+              <p class="mb-4">
+                One Time Password will be sent to your email address/phone.
+              </p>
+  
+              <div class="text-left md-form mb-5">
+                <input type="text" id="username" class="form-control" formControlName="username" mdbInput mdbValidate>
+                <label for="username">Email/Phone</label>
+                <mdb-error *ngIf="isValidUsername">
+                  <small class="form-text text-danger mb-4 ">
+                    Please enter username.
+                  </small>
+                </mdb-error>
+              </div>
+
+              <button mdbBtn color="info" outline="true" rounded="true" block="true" 
+                      class="z-depth-0 waves-effect mb-3" mdbWavesEffect 
+                      type="submit" [disabled]="!forgotPwdForm.valid || loading" (click)="forgotPassword()">
+                      <span *ngIf="!loading">Reset Password</span>
+                      <span *ngIf="loading">
+                        <i class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></i> Sending request...</span>
+              </button>
+            </form>
+  
+            <div class="mt-4 text-right">
+              <a class="go-to-sign-in blue-text" [routerLink]="['/login']" ><i class="fa fa-angle-left"></i> Back to Login</a>
+            </div>
+  
+          </mdb-card-body>
+        </mdb-card>
+        
+        <mdb-card *ngIf="success">
+          <mdb-card-header class="nvb-bg text-center py-4 app-text-color">
+            <h4 class="title"><mdb-icon fas icon="check"></mdb-icon>Password Reset Request successful.</h4>
+          </mdb-card-header>
+        
+          <mdb-card-body class="px-lg-5">
+            <div class="text-center">
+                <mdb-icon fas icon="envelope-open-text" size="4x" class="animated rotateIn mb-4"></mdb-icon>
+                <p class="text-monospace">
+                    To reset your account password,<br >
+                    Use One-Time-Password send to your phone number Or <br>
+                    A Link send to your email address.
+                </p>
+            </div>
+            <div class="mt-4 text-right">
+              <a class="go-to-sign-in blue-text" [routerLink]="['/login']" ><i class="fa fa-angle-left"></i> Back to Login</a>
+            </div>
+          </mdb-card-body>
+        </mdb-card>
+
+      </div>
+    </div>
+  </section>
