@@ -5,6 +5,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AuthGuard } from '../_providers/guards/auth.guard';
 import { UserFormComponent } from './user/user-form/user-form.component';
 import { UserComponent } from './user/user/user.component';
+import { NotificationListComponent } from './notification-list/notification-list.component';
 
 
 const routes: Routes = [
@@ -16,6 +17,7 @@ const routes: Routes = [
       { path: 'item', loadChildren: () => import('./drop/drop.module').then(m => m.DropModule) },
       { path: 'shops', loadChildren: () => import('./shops/shops.module').then(m => m.ShopsModule) },
       { path: 'user', loadChildren: () => import('./user/user.module').then(m => m.UserModule) },
+      { path: 'notifications', component: NotificationListComponent }
       // { path: 'user-profile', component: UserComponent}
     ]
   }

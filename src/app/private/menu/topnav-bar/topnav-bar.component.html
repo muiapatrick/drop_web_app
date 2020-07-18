@@ -17,10 +17,38 @@
           <li class="nav-item dropdown waves-light" dropdown role="presentation">
             <a dropdownToggle class="nav-link dropdown-toggle waves-light info-number" mdbWavesEffect>
               <i class="fa fa-envelope"></i>
-              <span class="badge bg-green">6</span>
+              <span class="badge bg-green">{{messageCount}}</span>
             </a>
-            <ul class="dropdown-menu dropdown-menu-right msg_list" role="menu">
-                <li class="dropdown-item">
+            <ul *ngIf="messageCount > 0" class="dropdown-menu dropdown-menu-right msg_list" role="menu" style="overflow-y: scroll;">
+              <li class="dropdown-item messages" *ngFor="let message of messageList | slice:0:5; let i = index"
+                (click)="openMessage(message)">
+                <a>
+                  <span>
+                    <span>{{message.title}}
+                      <span class="mr-2 badge badge-success" *ngIf="!message.read">new</span>
+                    </span>
+                  </span>
+                  <span class="message">
+                    {{message.message}}
+                  </span>
+                  <span class="mr-2"></span>
+                  <span class="time">{{message.created_at}}</span>
+
+                </a>
+              </li>
+              <li class="dropdown-item viewall">
+                <div class="text-center">
+                  <a (click)="viewAll()">
+                    <span>
+                      <strong>View All</strong>
+                      <!-- <i class="fa fa-angle-right"></i> -->
+                    </span>
+                    <!-- <strong>View All</strong>
+                    <i class="fa fa-angle-right"></i> -->
+                  </a>
+                </div>
+              </li> 
+                <!-- <li class="dropdown-item">
                   <a>
                     <span class="image"><img src="assets/img.jpg" alt="Profile Image"/></span>
                     <span>
@@ -75,7 +103,7 @@
                       <i class="fa fa-angle-right"></i>
                     </a>
                   </div>
-                </li>
+                </li> -->
             </ul>
           </li>
           <li class="nav-item dropdown waves-light" dropdown>

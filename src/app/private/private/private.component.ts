@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/_models/user';
 import { UserService } from 'src/app/_providers/services/user.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { PostService } from 'src/app/_providers/services/post.service';
 
 @Component({
   selector: 'app-private',

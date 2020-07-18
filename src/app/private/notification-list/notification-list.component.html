@@ -1,0 +1,55 @@
+<div class="drop_content">
+    <div class="row">
+        <div class="col-md-12 mb-4" style="padding-top: 5px;">
+            <div class="card">
+                <div class="card-body border-top">
+                    <div class="row justify-content-between mb-2">
+                        <div class="col-md-4">
+                            <h2>Drop <small>notifications</small></h2>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-lg-12 col-sm-6 overlay" *ngIf="loading">
+                            <div class="spinner-wrapper">
+                              <div class="spinner"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-sm-6">
+                            <div class="table-responsive">
+                                <table class="table table-hover table-sm">
+                                    <caption>List of Notifications</caption>
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Title</th>
+                                            <th scope="col">Message</th>
+                                            <th scope="col">Time</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                                                                    <!-- [ngStyle]="{'background-color': !message.read ? 'rgb(131, 223, 177)': '', 'cursor': !message.read? 'pointer': 'hand'}" -->
+                                        <tr *ngFor="let message of messageList; let i = index;" style="cursor: pointer"
+                                            (click)="openMessage(message)">
+                                            <td>{{ itemNumber(i) }}.</td>
+                                            <td>{{message.title}}
+                                                <span class="mr-2 badge badge-success" *ngIf="!message.read">new</span>
+                                            </td>
+                                            <td>{{message.message}}</td>
+                                            <td>{{message.created_at}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <pagination class="float-left" [maxSize]="MAX_SIZE" [totalItems]="page.totalElements" 
+                        [(ngModel)]="page.pageNumber" [itemsPerPage]="page.size"
+                            (pageChanged)="pageChanged($event)">
+                        </pagination >
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

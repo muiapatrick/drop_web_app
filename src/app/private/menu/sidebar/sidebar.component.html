@@ -2,9 +2,9 @@
   <div class="left_col scroll-view  wow fadeInLeft animate" data-wow-delay="0.3s"
   style="animation-name: fadeInLeft; animation-delay: 0.3s;">
     <div class="navbar nav_title" style="border: 0; box-shadow: none;">
-      <a href="index.html" class="site_title">
-        <!-- <i class="fa fa-paw"></i>  -->
-        <img src="" alt="Drop">
+      <a [routerLink]="['/drop']" class="site_title">
+        <i class="fa fa-tint"></i> <span>Drop</span>
+        <!-- <img src="" alt="Drop"> -->
         <!-- <span>Gentellela Alela!</span> -->
       </a>
     </div>
@@ -36,7 +36,7 @@
           </li> -->
           <li>
             <a id="dropli" (click)="anchorClicked('dropli')">
-              <i class="fa fa-tint" aria-hidden="true"></i>Drop 
+              <i class="fas fa-tint" aria-hidden="true"></i>Drop 
               <span class="fa fa-chevron-down"></span>
             </a>
             <ul class="nav child_menu">
@@ -54,7 +54,7 @@
           </li>
           <li>
             <a id="settingsli" (click)="anchorClicked('settingsli')">
-              <i class="fa fa-cogs" aria-hidden="true"></i>Settings 
+              <i class="fas fa-cogs" aria-hidden="true"></i>Settings 
               <span class="fa fa-chevron-down"></span>
             </a>
             <ul class="nav child_menu">

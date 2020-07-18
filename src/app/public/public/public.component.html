@@ -2,7 +2,8 @@
     <mdb-navbar SideClass="navbar navbar-expand-lg navbar-light fixed-top scrolling-navbar nvb-bg">
         <mdb-navbar-brand>
             <a class="navbar-brand waves-light" routerLink="/home">
-                <img src="../../../assets/images/mcrb.png" class="img-fluid cb_logo_width" alt="Drop">
+                <!-- <img src="../../../assets/images/mcrb.png" class="img-fluid cb_logo_width" alt="Drop"> -->
+                <i class="fa fa-tint"></i> <span>Drop</span>
             </a>
         </mdb-navbar-brand>
         <links>
@@ -48,18 +49,16 @@
             </ul>
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <button class="btn btn-sm btn-rounded waves-effect mx-3 px-4 btn-danger"
-                        data-toggle="modal" data-target="#basicExample"
+                    <a class="btn btn-sm btn-rounded waves-effect mx-3 px-4 btn-danger"
                         mdbBtn mdbWavesEffect [routerLink]="['/login']">
-                        <i class="fas fa-sign-in-alt"></i>Log in
-                    </button>
+                      <i class="fas fa-sign-in-alt"></i>Log in
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <button class="btn btn-sm btn-rounded waves-effect mx-3 px-4"
-                        mdbBtn color="default" mdbWavesEffect data-toggle="modal" data-target="#basicExample"
-                        [routerLink]="['/register']">
+                    <a class="btn btn-sm btn-rounded waves-effect mx-3 px-4"
+                        mdbBtn mdbWavesEffect color="default" [routerLink]="['/register']">
                         <i class="fas fa-user-plus"></i>Register Now
-                    </button>
+                    </a>
                 </li>
             </ul>
         </links>
