@@ -12,6 +12,7 @@ export const environment = {
   grant_type_client: 'client_credentials',
   public_key: 'QrspHGvroh77MnITdPdHHzzqSgnhI4re',
   private_key: 'xCpE9nc9Tbek6xkT',
+  google_map_api_key: 'AIzaSyC_2bjO2wL-sv-Gaq94-j63rHm2Jo8SJB8',
   firebase: {
     apiKey: "AIzaSyC_2bjO2wL-sv-Gaq94-j63rHm2Jo8SJB8",
     authDomain: "drop-279311.firebaseapp.com",

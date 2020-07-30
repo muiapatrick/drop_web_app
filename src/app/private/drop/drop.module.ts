@@ -15,6 +15,7 @@ import { MatTableModule }  from '@angular/material/table';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { DropItemComponent } from './drop-item/drop-item.component';
 import { DropActionComponent } from './drop-action/drop-action.component';
+import { environment } from 'src/environments/environment';
 
 
 // import { environment } from '../../../environments/environment';
@@ -45,7 +46,7 @@ import { DropActionComponent } from './drop-action/drop-action.component';
     DropdownModule,
     CheckboxModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyC_2bjO2wL-sv-Gaq94-j63rHm2Jo8SJB8',
+      apiKey: environment.google_map_api_key,
       libraries: ['places']
     }),
     AgmDirectionModule,
