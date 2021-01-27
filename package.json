@@ -30,7 +30,7 @@
     "@types/scriptjs": "0.0.2",
     "agm-direction": "^0.8.0",
     "animate.css": "^3.7.2",
-    "bootstrap": "3.3.7",
+    "bootstrap": "3.4.1",
     "chart.js": "^2.5.0",
     "easy-pie-chart": "^2.1.7",
     "firebase": "^7.15.0",
